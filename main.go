@@ -19,11 +19,13 @@ func main() {
 
 	SaveUSer := user.NewRepository(db)
 	userService := user.NewService(SaveUSer)
+
 	userHandler := handler.NewUserHandler(userService)
 
 	router := gin.Default()
 	api := router.Group("/api/v1")
 	api.POST("/user", userHandler.RegisterUser)
+	api.POST("/sessions", userHandler.Login)
 
 	router.Run()
 }

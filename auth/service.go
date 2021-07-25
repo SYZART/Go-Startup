@@ -20,6 +20,7 @@ func NewService() *jwtservice {
 }
 
 func (s *jwtservice) GenerateToken(userID int) (string, error) {
+	//claim itu sama dengan payload
 	claim := jwt.MapClaims{}
 	claim["user_id"] = userID
 

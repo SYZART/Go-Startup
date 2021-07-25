@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// struct ini merupakan replikasi dari field dalam database dengan nama yang singular
 type User struct {
 	ID             int
 	Name           string

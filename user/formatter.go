@@ -1,5 +1,7 @@
 package user
 
+// formater untuk mengubah format json dalam postman
+//juga memudahkan bagian front-end kedepannya
 type UserFormater struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`

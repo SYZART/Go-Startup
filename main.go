@@ -6,7 +6,6 @@ import (
 	"bwastartup/handler"
 	"bwastartup/helper"
 	"bwastartup/user"
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -35,18 +34,19 @@ func main() {
 	//endpoint campaigns
 	campaignRepository := campaign.NewRepository(db)
 	campaignService := campaign.NewService(campaignRepository)
-	campaign, _ := campaignService.FindCampaigns(3)
-
-	fmt.Println(len(campaign))
+	campaignHandler := handler.NewCampaignHandler(campaignService)
 
 	//router
 	router := gin.Default()
+	router.Static("/images", "./images")
 	api := router.Group("/api/v1")
 	//path user
 	api.POST("/user", userHandler.RegisterUser)
 	api.POST("/sessions", userHandler.Login)
 	api.POST("/email_checkers", userHandler.CheckEmailAvailability)
 	api.POST("/avatars", authMiddleware(authService, userService), userHandler.UploadAvatar)
+	//path campaigns
+	api.GET("/campaigns", campaignHandler.GetCampaigns)
 
 	router.Run()
 }

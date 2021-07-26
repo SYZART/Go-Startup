@@ -34,19 +34,10 @@ func main() {
 	userHandler := handler.NewUserHandler(userService, authService)
 	//endpoint campaigns
 	campaignRepository := campaign.NewRepository(db)
+	campaignService := campaign.NewService(campaignRepository)
+	campaign, _ := campaignService.FindCampaigns(3)
 
-	campaign, _ := campaignRepository.FindByUserID(1)
-
-	fmt.Println("====")
-	fmt.Println("====")
 	fmt.Println(len(campaign))
-	for _, v := range campaign {
-		fmt.Println(v.Name)
-		if len(v.CampaignImages) > 0 {
-			fmt.Println(v.CampaignImages[0].FileName)
-
-		}
-	}
 
 	//router
 	router := gin.Default()

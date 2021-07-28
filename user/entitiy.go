@@ -13,6 +13,6 @@ type User struct {
 	PasswordHash   string
 	AvatarFileName string
 	Role           string
-	Created_at     time.Time
-	Updated_at     time.Time
+	CreatedAt      time.Time
+	UpdatedAt      time.Time
 }
